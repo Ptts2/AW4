@@ -1,0 +1,150 @@
+<html>
+
+<head>
+    <title>Ejercicio 1</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="./script.js"></script>
+</head>
+
+<body>
+
+    <div id="maindiv">
+        <div id="leftBar">
+            <header id="leftHeader">
+                <ul>
+                    <li>
+                        <a href="">Inicio</a>
+                    </li>
+                    <li>
+                        <label id="labelLink" for="submit-form">Generar CV</label>
+                    </li>
+                </ul>
+            </header>
+        </div>
+
+        <div id="cvbody">
+            <header id="mainHeader">
+                <h1>
+                    <b>Elaboración del Currículum Vitae</b>
+                </h1>
+            </header>
+
+
+            <div>
+                <h2>
+                    Datos Curriculum Vitae:
+                </h2>
+
+                <form name="form" id="form" action="javascript:validateCV(form)">
+
+                    <table>
+
+                        <tr>
+                            <td>
+                                <label for="name">Nombre: </label>
+                            </td>
+
+                            <td>
+                                <input type="text" id="name" required>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label for="surname">Apellidos: </label>
+                            </td>
+
+                            <td>
+                                <input type="text" id="surname" required>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label for="dni">DNI: </label>
+                            </td>
+
+                            <td>
+                                <input type="text" id="dni" name="dni" onchange="validateDNI(dni.value);" required> <label id="DNIcheckLabel" style="color:red;">X</label>
+                            </td>
+
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label>Género: </label>
+                            </td>
+                            <td>
+                                <label for="male"><input id="male" type="radio" name="gender" value="male" checked
+                                        required>Hombre</label>
+                                &nbsp<label for="female"><input id="female" type="radio" name="gender" value="female"
+                                        required>Mujer</label>
+                                &nbsp<label for="other"><input id="other" type="radio" name="gender" value="other"
+                                        required>Otro</label>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label>Otros datos: </label>
+                            </td>
+                            <td>
+                                <label for="knowEnglish"><input type="checkbox" id="knowEnglish">Hablar Inglés
+                                    Fluido</label>
+                                <label for="workExperience"><input type="checkbox" id="workExperience">Mucha
+                                    Experiencia</label>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label for="bornDate">Fecha de nacimiento: </label>
+                            </td>
+
+                            <td>
+                                <input type="date" id="bornDate" required>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label for="email">Email: </label>
+                            </td>
+
+                            <td>
+                                <input type="email" id="email" required>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <label for="photo">Foto: </label>
+                            </td>
+
+                            <td>
+                                <input type="file" id="photo" accept="image/x-png,image/gif,image/jpeg" required>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                                <label for="curriculum">Resumen: </label>
+                            </td>
+
+                            <td>
+                                <textarea id="curriculum" required rows="4" cols="45" required></textarea>
+                            </td>
+                        </tr>
+
+                    </table>
+
+                    <button style="border: none; background:none; display:none; " type="submit" id="submit-form"></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
