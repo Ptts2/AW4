@@ -5,37 +5,30 @@ var dniValidated = false;
 
 function validateDNI(dni){
 
+    var d = document.getElementById("DNIcheckLabel");
 
-    
+    if(dni.length != 9) { badDNI(); return;}
 
-    if(dni.length != 9) badDNI();
+    const letrasDNI =["T","R","W","A","G","M","Y","F","P","D","X","B","N","J","Z","S","Q","V","H","L","C","K","E"];
+    if(!letrasDNI.includes(dni[8].toUpperCase())) { badDNI(); return; }
 
-    diccionario =["A","B","C","D","E","F","G","H","I","J","K","L","N","M","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
-    if(!diccionario.includes(dni[8])) badDNI();
+    var DNIn = dni.substring(0,8);
+    var digito = letrasDNI[DNIn%23];
 
-    else goodDNI();
-
-    console.log(dni);
-    dniValidated = true;
-    
-
+    if(digito == dni[8].toUpperCase()) {goodDNI(); return;}
+    else {badDNI(); return;}
 
         
     function badDNI(){
         dniValidated = false;
-        var d = document.getElementById("DNIcheckLabel")
         d.innerHTML = "X";
         d.style="color:red;";
-        return;
     }
     function goodDNI(){
-        var d = document.getElementById("DNIcheckLabel")
+        dniValidated = true;
         d.innerHTML = "✓";
         d.style="color:green;";
-        return;
     }
-
-
 }
 
 function validateCV(cv){
