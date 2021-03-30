@@ -1,7 +1,54 @@
 
 var dniValidated = false;
 
+var clock
 
+class Hora {
+
+    constructor(reloj){
+        this.reloj = reloj;
+    }
+
+    getHour(){
+
+        var hora = new Date();
+
+        var h = hora.getHours();
+        var m = hora.getMinutes();
+        var s = hora.getSeconds();
+
+        if(h < 10)
+            h = "0"+h;
+        if(m < 10)
+            m = "0"+m;
+        if(s < 10)
+            s = "0"+s;
+
+        return {
+
+            hora: h,
+            minuto: m,
+            segundo: s,
+        };
+    }
+
+    updateHour(){
+        var hora = this.getHour();
+        this.reloj.innerHTML = "<b>"+hora.hora+":"+hora.minuto+":"+hora.segundo+"</b>";
+    }
+
+    loop(){
+        setInterval(()=>{this.updateHour()}, 500);
+    }
+}
+
+
+
+//Al cargar la pagina
+window.onload = ()=>{
+    clock = document.getElementById("clock");
+    new Hora(clock).loop();
+}
 
 function validateDNI(dni){
 
