@@ -48,6 +48,7 @@ class Hora {
 window.onload = ()=>{
     clock = document.getElementById("clock");
     new Hora(clock).loop();
+    getFromLocalStorage();
 }
 
 function validateDNI(dni){
@@ -84,11 +85,81 @@ function validateCV(cv){
         window.alert("ERROR: DNI Invalido!!");
         return;
     }
+
+    if(confirm("¿Quieres utilizar el almacenamiento interno para guardar los datos?")){
+        saveToLocalStorage();
+    }
+
     processCV(cv) 
 }
 
 function processCV(cv){
 
+
+
+
+}
+
+function getFromLocalStorage(){
+
+    document.getElementById("name").value=localStorage.getItem('name');
+    document.getElementById("surname").value=localStorage.getItem('surname');
+    var dni =localStorage.getItem('dni');
+    document.getElementById("dni").value=dni;
+    validateDNI(dni)
+
+    //Genero
+    const generos = document.querySelectorAll('input[name="gender"]');
+    for (let i of generos) {
+        if (localStorage.getItem(i.value) =='yes') {
+            i.checked=true;
+            break;
+        }  
+    }
+
+    //Otros datos
+    const otrosDatos = document.querySelectorAll('input[name="otrosDatos"]');
+    for (let i of otrosDatos) {
+        if (localStorage.getItem(i.value) =='yes') 
+            i.checked=true;
+    }
+
+
+    document.getElementById("bornDate").value=localStorage.getItem('bornDate');
+    document.getElementById("email").value=localStorage.getItem('email');
+    document.getElementById("curriculum").value=localStorage.getItem('curriculum');
+
+}
+
+function saveToLocalStorage(){
+
+    localStorage.setItem('name', document.getElementById("name").value);
+    localStorage.setItem('surname',document.getElementById("surname").value);
+    localStorage.setItem('dni',document.getElementById("dni").value);
+
+    //Genero
+    const generos = document.querySelectorAll('input[name="gender"]');
+    for (let i of generos) {
+        if (i.checked) 
+            localStorage.setItem(i.value,'yes');
+        else
+            localStorage.setItem(i.value,'no');
+        
+    }
+
+    //Otros datos
+    const otrosDatos = document.querySelectorAll('input[name="otrosDatos"]');
+    for (let i of otrosDatos) {
+        if (i.checked) 
+            localStorage.setItem(i.value,'yes');
+        else
+            localStorage.setItem(i.value,'no');
+        
+    }
+
+    localStorage.setItem('bornDate',document.getElementById("bornDate").value);
+    localStorage.setItem('email',document.getElementById("email").value);
+    localStorage.setItem('curriculum',document.getElementById("curriculum").value);
 
 
 
