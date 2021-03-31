@@ -2,7 +2,8 @@
 var dniValidated = false;
 
 var clock
-
+var photoCV;
+var photoList;
 class Hora {
 
     constructor(reloj){
@@ -79,6 +80,23 @@ function validateDNI(dni){
     }
 }
 
+function loadPhoto(photo){
+
+    photoList = photo;
+
+    var file = photoList[0];
+    
+    photoCV = document.createElement("img");
+    photoCV.classList.add("obj");
+    photoCV.file = file;
+    photoCV.width = 100;
+
+    var reader = new FileReader();
+    reader.onload = (function(aImg) { return function(e) { aImg.src = e.target.result; }; })(photoCV);
+    reader.readAsDataURL(file);
+
+}
+
 function validateCV(cv){
 
     if(!dniValidated){
@@ -96,28 +114,29 @@ function validateCV(cv){
 function processCV(cv){
 
 
-        //Genero
+    //Genero
 
-        var gen;
-        const generos = document.querySelectorAll('input[name="gender"]');
-        for (let i of generos) {
-            if (i.checked){
-                gen = i.value;
-                break;
-            }
+    var gen;
+    const generos = document.querySelectorAll('input[name="gender"]');
+    for (let i of generos) {
+        if (i.checked){
+            gen = i.value;
+            break;
         }
+    }
     
-        //Otros datos
+    //Otros datos
 
-        var otDat = "<ul>";
+    var otDat = "<ul>";
 
-        const otrosDatos = document.querySelectorAll('input[name="otrosDatos"]');
-        for (let i of otrosDatos) {
-            if (i.checked) 
-            otDat += "<li>"+i.value+"</li>";         
-        }
-        otDat +="</ul>";
+    const otrosDatos = document.querySelectorAll('input[name="otrosDatos"]');
+    for (let i of otrosDatos) {
+        if (i.checked) 
+        otDat += "<li>"+i.value+"</li>";         
+    }
+    otDat +="</ul>";
 
+   
     var cvHTML = `<html>
     <head> 
         <title> CV de `+cv.name.value+`</title>
@@ -139,6 +158,11 @@ function processCV(cv){
                 </li>
             </ul>
         </header>
+
+        <div id="imagenCV">
+            <p> <b> Foto: </b> </p>
+        </div>
+
         </div>
 
         <div class="cvbody">
@@ -194,13 +218,26 @@ function processCV(cv){
         </div>
     </div>
     </body>
+
     </html>
 
     `
 
-    
     var cvTab = window.open('about:blank', '_blank');
+
     cvTab.document.write(cvHTML);
+    console.log(photoCV);
+    console.log(cvTab);
+
+    function sleep (time) {
+        return new Promise((resolve) => setTimeout(resolve, time));
+    }
+
+    sleep(100).then(()=> {
+        cvTab.document.getElementById("imagenCV").appendChild(photoCV);
+    });
+    
+    
 
 
 
