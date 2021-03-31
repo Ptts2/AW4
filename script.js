@@ -96,6 +96,112 @@ function validateCV(cv){
 function processCV(cv){
 
 
+        //Genero
+
+        var gen;
+        const generos = document.querySelectorAll('input[name="gender"]');
+        for (let i of generos) {
+            if (i.checked){
+                gen = i.value;
+                break;
+            }
+        }
+    
+        //Otros datos
+
+        var otDat = "<ul>";
+
+        const otrosDatos = document.querySelectorAll('input[name="otrosDatos"]');
+        for (let i of otrosDatos) {
+            if (i.checked) 
+            otDat += "<li>"+i.value+"</li>";         
+        }
+        otDat +="</ul>";
+
+    var cvHTML = `<html>
+    <head> 
+        <title> CV de `+cv.name.value+`</title>
+        <link rel="stylesheet" href="./style.css">
+        <script src="./script.js"></script>
+    </head>
+
+    <body>
+
+    <div class="maindiv">
+        <div class="leftBar">
+        <header>
+            <ul>
+                <li>
+                    <a href="./index.html">Inicio</a>
+                </li>
+                <li>
+                    <a href="#">Generar CV</a>
+                </li>
+            </ul>
+        </header>
+        </div>
+
+        <div class="cvbody">
+        <header>
+            <h1>
+                <b>Currículum Vitae de `+cv.name.value+`</b>
+            </h1>   
+        </header>
+        
+        <h2>
+            Datos:
+        </h2>
+
+        <table>
+
+        <tr style="background-color: LightGray;">
+            <td>Nombre: </td>
+            <td>`+cv.name.value+`</td>
+        </tr>
+
+        <tr>
+            <td>Apellidos: </td>
+            <td>`+cv.surname.value+`</td>
+        </tr>
+
+        <tr style="background-color: LightGray;">
+            <td>DNI: </td>
+            <td>`+cv.dni.value+`</td>
+        </tr>
+
+        <tr>
+            <td>Género: </td>
+            <td>`+gen+`</td>
+        </tr>
+
+        <tr style="background-color: LightGray;">
+            <td>Otros datos: </td>
+            <td>`+otDat+`</td>
+        </tr>
+        
+        <tr>
+            <td>Fecha de nacimiento: </td>
+            <td>`+cv.bornDate.value+`</td>
+        </tr>
+
+        <tr style="background-color: LightGray;">
+            <td>Resumen: </td>
+            <td>`+cv.curriculum.value+`</td>
+        </tr>
+        </table>
+
+
+        </div>
+    </div>
+    </body>
+    </html>
+
+    `
+
+    
+    var cvTab = window.open('about:blank', '_blank');
+    cvTab.document.write(cvHTML);
+
 
 
 }

@@ -1,13 +1,13 @@
 
 
-#leftBar{
+.leftBar{
     order:1;
     margin-top: 5%;
     width: 15%;
     height: 100%;
 }
 
-#cvbody{
+.cvbody{
     order:2;
     width: 85%;
     height: 100%;
@@ -19,7 +19,7 @@
     text-align: left;
 }
 
-#maindiv{
+.maindiv{
     display: flex;
     height: 100%;
 }
