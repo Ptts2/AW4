@@ -159,10 +159,6 @@ function processCV(cv){
             </ul>
         </header>
 
-        <div id="imagenCV">
-            <p> <b> Foto: </b> </p>
-        </div>
-
         </div>
 
         <div class="cvbody">
@@ -177,35 +173,43 @@ function processCV(cv){
         </h2>
 
         <table>
-
         <tr style="background-color: LightGray;">
+            <td>Foto: </td>
+            <td id="imagenCV"></td>
+        </tr>
+        <tr>
             <td>Nombre: </td>
             <td>`+cv.name.value+`</td>
         </tr>
 
-        <tr>
+        <tr style="background-color: LightGray;">
             <td>Apellidos: </td>
             <td>`+cv.surname.value+`</td>
         </tr>
 
-        <tr style="background-color: LightGray;">
+        <tr>
             <td>DNI: </td>
             <td>`+cv.dni.value+`</td>
         </tr>
 
-        <tr>
+        <tr style="background-color: LightGray;">
             <td>Género: </td>
             <td>`+gen+`</td>
         </tr>
 
-        <tr style="background-color: LightGray;">
+        <tr>
             <td>Otros datos: </td>
             <td>`+otDat+`</td>
         </tr>
         
-        <tr>
+        <tr style="background-color: LightGray;">
             <td>Fecha de nacimiento: </td>
             <td>`+cv.bornDate.value+`</td>
+        </tr>
+
+        <tr >
+            <td>Email: </td>
+            <td>`+cv.email.value+`</td>
         </tr>
 
         <tr style="background-color: LightGray;">
@@ -222,24 +226,17 @@ function processCV(cv){
     </html>
 
     `
-
-    var cvTab = window.open('about:blank', '_blank');
+    var cvTab = window.open();
+    cvTab.document.open();
 
     cvTab.document.write(cvHTML);
-    console.log(photoCV);
-    console.log(cvTab);
 
     function sleep (time) {
         return new Promise((resolve) => setTimeout(resolve, time));
     }
-
     sleep(100).then(()=> {
         cvTab.document.getElementById("imagenCV").appendChild(photoCV);
     });
-    
-    
-
-
 
 }
 
